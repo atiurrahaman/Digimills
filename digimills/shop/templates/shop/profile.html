@@ -1,0 +1,69 @@
+{% extends 'shop/base.html' %} 
+{% block title %}{{request.user.get_full_name}}{% endblock title %} 
+{% block main-content %}
+<div class="content-area">
+  <div class="account-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <h2>My Account</h2>
+          <ul>
+            <li class="active">
+              <a href="{% url 'profile' %}">Account Control Panel</a>
+            </li>
+            <li>
+              <a href="{% url 'account_edit' request.user.username %}"
+                >Edit Personal Details
+							</a>
+            </li>
+            <li><a href="{% url 'show_address' %}">All Addresses</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-9">
+          <h2>Account Control Panel</h2>
+          <strong>Hello {{request.user.get_full_name}}</strong><br />
+          <p>
+            From your account control panel, you can access all of your recent
+            activites, orders, save products and you can edit your personal
+            information and other details.
+          </p>
+          <v class="row">
+            <div class="col-md-6 col-sm-6">
+              <div class="well">
+                <h3>Personal Information</h3>
+                <p>Name : {{request.user.get_full_name}}</p>
+                <p>Email : {{request.user.email}}</p>
+                {% comment %}
+                <p>
+                  Contact : {% if user.mobile %}{{user.mobile}}{% else %}None{%
+                  endif %}
+                </p>
+                {% endcomment %}
+                <p class="pull-right">
+                  <a href="{% url 'account_edit' request.user.username %}"
+                    ><i class="fa fa-edit"></i> Edit</a
+                  >
+                </p>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6">
+              <div class="well">
+                <h3>Account Actions</h3>
+                <button>
+                  <a href="{% url 'password_change' %}">Change Password</a>
+                </button>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--End Row-->
+    </div>
+  </div>
+  <!--End Account page div-->
+</div>
+<!-- End content Area class -->
+{% endblock main-content %}

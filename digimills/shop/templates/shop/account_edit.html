@@ -1,0 +1,63 @@
+{% extends 'shop/base.html' %} {% block title %}User Account{% endblock title %}
+{% block main-content %}
+<div class="wrapper">
+  <div class="content-area">
+    <div class="account-page">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <h2>My Account</h2>
+            <ul>
+              <li><a href="{% url 'profile' %}">Account Control Panel</a></li>
+              <li class="active">
+                <a href="{% url 'account_edit' request.user.username %}"
+                  >Edit Personal Details</a
+                >
+              </li>
+              <li><a href="{% url 'show_address' %}">All Addresses</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-9">
+            <h2>Edit Account</h2>
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <form method="post" class="cmxform" action="" id="signUpForm">
+                  {% csrf_token %} {% for field in form %}
+                  <div class="form-group row">
+                    <span class="col-sm-2 form-control-label"
+                      >{{field.label_tag}}</span
+                    >
+                    <div class="col-sm-8">
+                      {{field}}
+                      <small class="text-danger"
+                        >{{field.errors|striptags}}</small
+                      >
+                    </div>
+                  </div>
+                  {% endfor %}
+
+                  <div class="form-group row">
+                    <div class="col-sm-offset-2 col-sm-8">
+                      <input
+                        type="submit"
+                        class="btn btn-yellow btn-lg"
+                        id="submitForm"
+                        value="Save"
+                      />
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!--End Row-->
+          </div>
+        </div>
+        <!--End Row-->
+      </div>
+    </div>
+    <!--End Account page div-->
+  </div>
+  <!-- End content Area class -->
+</div>
+<!-- End wrapper -->
+{% endblock main-content %}

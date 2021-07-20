@@ -1,0 +1,74 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Products{% endblock title %}
+
+{% block main-content %}
+<div class="content-area prodcuts">
+
+    <div class="row">
+        <div class="container">
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <div class="sidebar-products-main">
+                    <ul class="list-group">
+                        <li class="list-group-item"><h3 class="text-center">Filter By</h3></li>
+                        <a href="#"><li class="list-group-item text-center">Clothes</li></a>
+                        <a href="{% url 'mobile' %}"><li class="list-group-item text-center">Mobiles</li></a>
+                    </ul>
+
+
+                </div>
+            </div>
+            <div class="col-sm-10 col-md-10 col-lg-10">
+                <ol class="breadcrumb breadcrumb1">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li class="active">Products</li>
+                </ol>
+            
+                <div class="all-products">
+                    <div class="">
+                        <h2 class="title-div wow slideInRight" data-wow-duration="1s" data-wow-delay="0s" data-wow-offset="10">Our Latest Products available</h2>
+                        <div class="products">
+                            <div class="row">
+                                {% for product in products %}
+                                <div class="col-md-3">
+                                    <div class="product-item">
+                                        <div class="product-borde-inner">
+                                            <a href="{% url 'product_single' product.id %}">
+                                                <img src="{{product.img.url}}" width="200px" height="150px" />
+                                            </a> 
+
+                                            <div class="product-price">
+                                                <a href="{% url 'product_single' product.id %}">{{product.title}}</a><br />
+                                                <span class="prev-price">
+                                                    <del>{{product.market_price}} Rs</del>
+                                                </span>
+                                                <span class="current-price">
+                                                    {{product.selling_price}} Rs
+                                                </span>
+                                            </div>
+
+                                            <form action="/add-to-cart" class="d-inline">
+                                                <input type="hidden" name="pro_id" value={{product.id}} id="pro_id">
+                                                 <button type="submit" class="btn btn-danger shadow px-5"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart</button>
+                                        </form>
+                                            <div class="clear"></div>
+                                        </div>
+                                    </div> 
+                                </div>
+                                {% endfor %}
+                                <div class="clear"></div>
+                            </div> <!-- End Latest products row-->
+                            <a class="btn btn-blue btn-lg pull-right btn-more wow slideInRight" data-wow-duration="1s" data-wow-delay="0s" data-wow-offset="10"> 
+                                <span>See More products.. </span>
+                            </a>
+                            <div class="clear"></div>
+                        </div> <!-- End products div-->
+                    </div> <!-- End container latest products-->
+              <!-- End Latest products -->
+            </div>
+        </div>
+    </div>
+</div> <!-- End content Area class -->
+
+{% endblock main-content %}

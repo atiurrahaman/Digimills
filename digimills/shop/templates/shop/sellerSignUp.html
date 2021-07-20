@@ -1,0 +1,39 @@
+{% extends 'shop/base.html' %}
+{% block title %}Seller Registration{% endblock title %}
+{% block main-content %}
+    <div class="wrapper">
+
+<div class="content-area">
+
+    <div class="registration-page">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <h2 class="text-center">Create Your Account</h2>
+                    <form method="post" class="cmxform" action="" id="signUpForm" novalidate>{% csrf_token %}
+                        {% for field in form %}
+                            <div class="form-group row">
+                                <span class="col-sm-2">{{field.label_tag}}</span>
+                                <div class="col-sm-8">{{field}}</div>
+                                <small class="text-danger">{{field.errors|striptags}}</small>
+                            </div>
+                        {% endfor %}
+                        <div class="form-group row mb-5">
+                            <div class="col-sm-offset-2 col-sm-8">
+                            <input type="submit" class="btn btn-success btn-lg btn-block" value="Register Now">
+                            <div>
+                        </div>
+                        
+                    </form>
+                    
+                </div>
+            </div> <!--End Row-->
+
+        </div>
+    </div> <!--End Registration page div-->
+
+</div> <!-- End content Area class -->
+
+</div> <!-- End wrapper -->
+{% endblock main-content%}

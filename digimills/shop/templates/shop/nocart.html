@@ -1,0 +1,9 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}Cart{% endblock title %}
+{% block main-content %}
+<h1 class="text-center text-primary">No items <a href="{% url 'products' %}">Shop More</a></h1>
+<div style="display:grid; justify-content:center; align-content: center; height:300px;" >
+    <img src="{% static 'shop/images/cart.png' %}" style="width:300px;height:300px;text-align:center;" alt="no-items in cart" class="img img-thumbnail">
+</div>
+{% endblock main-content %}

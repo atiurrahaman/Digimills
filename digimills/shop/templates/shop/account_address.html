@@ -1,0 +1,182 @@
+{% extends 'shop/base.html' %}
+{% block title %}All Addresses{% endblock title %}
+{% block main-content %}
+<div class="content-area">
+  <div class="account-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <h2>My Account</h2>
+          <ul>
+						<li><a href="{% url 'profile' %}">Account Control Panel</a></li>
+						<li>
+							<a href="{% url 'account_edit' request.user.username %}"
+								>Edit Personal Details</a
+							>
+						</li>
+						<li class="active">
+							<a href="{% url 'show_address' %}">All Addresses</a>
+						</li>
+					</ul>
+
+        </div>
+        <div class="col-sm-9">
+          <h2>Address</h2>
+          <div class="row">
+            {% if addresses %} {% for address in addresses %}
+            <div class="col-md-6 col-sm-6">
+              <div class="well">
+                <address class="address">
+                  <div class="row">
+                    <div class="col-md-6 text-center">
+                      <strong>Name:</strong>
+                    </div>
+                    <div class="col-md-6">{{user.get_full_name}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 text-center">
+                      <strong>Mobile:</strong>
+                    </div>
+                    <div class="col-md-6">{{address.mobile}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 text-center">
+                      <strong>House:</strong>
+                    </div>
+                    <div class="col-md-6">{{address.house_number}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 text-center">
+                      <strong>Street:</strong>
+                    </div>
+                    <div class="col-md-6">{{address.street}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 text-center">
+                      <strong>Locality:</strong>
+                    </div>
+                    <div class="col-md-6">{{address.locality}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 text-center">
+                      <strong>District:</strong>
+                    </div>
+                    <div class="col-md-6">{{address.district}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 text-center">
+                      <strong>State:</strong>
+                    </div>
+                    <div class="col-md-6">{{address.state}}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 text-center">
+                      <strong>Pincode:</strong>
+                    </div>
+                    <div class="col-md-6">{{address.pincode}}</div>
+                  </div>
+                </address>
+                <p class="pull-right">
+                  <a href="#"><i class="fa fa-edit"></i> Edit</a>
+                </p>
+                <div class="clearfix"></div>
+              </div>
+            </div>
+            {% endfor %} 
+            
+               <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                ADD NEW ADDRESS
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">ADD NEW ADDRESS</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="" method="post"> {% csrf_token %}
+                        {% if form.non_field_errors %}
+                          {% for error in form.non_field_errors %}
+                            <small class="text-danger">{{error}}</small>
+                          {% endfor %}
+                        {% endif %}
+                        {% for field in form %}                      
+                          <div class="form-group">
+                            {{field.label_tag}}
+                            {{field}}
+                            <small class="text-danger">{{field.errors|striptags}}</small>
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Add Address</button>
+                    </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+            {% else %}
+            
+            <div class="col-md-6">
+              <h4>No Address Found</h4>
+                            <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                ADD NEW ADDRESS
+              </button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">ADD NEW ADDRESS</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="" method="post"> {% csrf_token %}
+                        {% if form.non_field_errors %}
+                          {% for error in form.non_field_errors %}
+                            <small class="text-danger">{{error}}</small>
+                          {% endfor %}
+                        {% endif %}
+                        {% for field in form %}                      
+                          <div class="form-group">
+                            {{field.label_tag}}
+                            {{field}}
+                            <small class="text-danger">{{field.errors|striptags}}</small>
+                          </div>
+                        {% endfor %}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Add Address</button>
+                    </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <!--End Row-->
+    </div>
+  </div>
+  <!--End Account page div-->
+</div>
+<!-- End content Area class -->
+{% endblock main-content %}

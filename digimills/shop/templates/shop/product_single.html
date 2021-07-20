@@ -1,0 +1,182 @@
+{% extends 'shop/base.html' %}
+{% block title %}Product Single{% endblock title %}
+{% block main-content %}
+   <div class="wrapper">
+        
+<div class="content-area prodcuts">
+
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'products' %}">Products</a></li>
+            <li class="active">{{product.title}}</li>
+        </ol>
+
+        <div class="single-product">
+            <div class="row" id="">
+                <div class="col-md-6 single-top-left">  
+                   <img src="{{product.img.url}}" class="img img-responsive" alt="{{product.title}}">
+                </div>
+                <div class="col-md-6 single-top-right">
+                    <h3 class="item_name">{{product.title}}</h3>
+                    <p>Processing Time: Item will be shipped out within 2-3 working days. </p>
+                    <div class="single-rating">
+                        <ul>
+                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                            <li><i class="fa fa-star-o" aria-hidden="true"></i></li>
+                            <li class="rating">20 reviews</li>
+                            <li><a href="#">Add your review</a></li>
+                        </ul> 
+                    </div>
+                    <div class="single-price">
+                        <ul>
+                            <li class="product-price">{{product.selling_price}}/-</li>  
+                            <li><del>{{product.market_price}}/-</del></li> 
+                            <li><span class="off">10% OFF</span></li> 
+                            <li>Ends on: June,5th</li>
+                            <li><a href="#"><i class="fa fa-gift" aria-hidden="true"></i> Coupon</a></li>
+                        </ul>   
+                    </div> 
+                    <p class="single-price-text">Fusce a egestas nibh, eget ornare erat. Proin placerat, urna et consequat efficitur, sem odio blandit enim, sit amet euismod turpis est mattis lectus. Vestibulum maximus quam et quam egestas imperdiet. In dignissim auctor viverra. </p>
+                    {% if request.user.is_authenticated %}
+                        {% if item_already_in_cart %}
+                            <a href="{% url 'cart' %}" class="btn btn-warning px-5 py-2">Go To Cart</a>
+                        {% else %}   
+                        <form action="/add-to-cart" class="d-inline">
+                                    <input type="hidden" name="pro_id" value={{product.id}} id="pro_id">
+                                    <button type="submit" class="btn btn-primary shadow px-5"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart</button>
+                        </form>
+                        {% endif %}
+                    {% else %}
+                        <form action="/add-to-cart" class="d-inline">
+                                    <input type="hidden" name="pro_id" value={{product.id}} id="pro_id">
+                                    <button type="submit" class="btn btn-primary shadow px-5"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add to Cart</button>
+                        </form>
+                    {% endif %}
+                </div>
+                <div class="clearfix"> </div>  
+            </div>
+            <div class="single-page-icons social-icons"> 
+                <ul>
+                    <li><h4>Share on</h4></li>
+                    <li><a href="#" class="fa fa-facebook-square icon facebook"> </a></li>
+                    <li><a href="#" class="fa fa-twitter-square icon twitter"> </a></li>
+                    <li><a href="#" class="fa fa-google-plus-square icon googleplus"> </a></li>
+                    <li><a href="#" class="fa fa-rss-square icon rss"> </a></li> 
+                </ul>
+            </div>
+
+            <div class="single-product-everything">
+
+                <div class="single-extra-div">
+                    <a data-toggle="collapse" class="pointer main" aria-expanded="true" data-target="#productDescriptionCollapse" aria-controls="#productDescriptionCollapse">
+                        <span class="pull-left title-sidebar"><i class="fa fa-info-circle"></i> Product Description</span>
+
+                        <span class="pull-right"><i class="fa fa-plus"></i></span>
+                        <span class="pull-right"><i class="fa fa-minus"></i></span>
+                        <div class="clearfix"></div>
+                    </a>
+                    <div id="productDescriptionCollapse" class="collapse in collapseDiv">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div> <!-- End single product extra div -->
+
+                <div class="single-extra-div">
+                    <a data-toggle="collapse" class="pointer main" aria-expanded="true" data-target="#productReviewCollapse" aria-controls="#productReviewCollapse">
+                        <span class="pull-left title-sidebar"> <i class="fa fa-check-square-o"></i>
+                            Product Reviews <span class="badge">2</span>
+                        </span>
+
+                        <span class="pull-right"><i class="fa fa-plus"></i></span>
+                        <span class="pull-right"><i class="fa fa-minus"></i></span>
+                        <div class="clearfix"></div>
+                    </a>
+                    <div id="productReviewCollapse" class="collapse collapseDiv">
+                        <div class="review">
+                            <h4>Polash Rana :</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+                        </div>
+                        <div class="review">
+                        <h4>Nur Ahmed :</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut </p>
+                        </div>
+                    </div>
+                </div> <!-- End single product extra div -->
+
+                <div class="single-extra-div">
+                    <a data-toggle="collapse" class="pointer main" aria-expanded="true" data-target="#productHelpCollapse" aria-controls="#productHelpCollapse">
+                        <span class="pull-left title-sidebar"> <i class="fa fa-question-circle"></i> Help </span>
+
+                        <span class="pull-right"><i class="fa fa-plus"></i></span>
+                        <span class="pull-right"><i class="fa fa-minus"></i></span>
+                        <div class="clearfix"></div>
+                    </a>
+                    <div id="productHelpCollapse" class="collapse collapseDiv">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    </div>
+                </div> <!-- End single product extra div -->
+                
+
+            </div> <!--End Sidebar title div-->
+
+
+
+
+        </div>  <!--End Single Product Div Everything-->
+
+
+    </div>
+
+    <div class="featured-products">
+        <div class="container">
+            <h2 class="title-div wow slideInLeft pull-left" data-wow-duration="1s" data-wow-delay="0s" data-wow-offset="10">Our Top Recommended products</h2><div class="clearfix"></div>
+            <div class="featured-navigation pull-right">
+                <span class="">
+                    <a class="owl-prev owl-navigaiton"><i class="fa fa-angle-double-right"></i></a>
+                </span>
+                <span class="stop">
+                    <a class="owl-next owl-navigaiton">||</a>
+                </span>
+                <span class="">
+                    <a class="owl-next owl-navigaiton"><i class="fa fa-angle-double-left"></i></a>
+                </span>
+
+            </div>
+            <div class="clear"></div>
+            <div class="featured-items">
+                <!-- Set up your HTML -->
+                <div class="owl-carousel">
+
+                    {% for product in products %}
+                    <div class="item featured1">
+                        <div class="item-full animated featured1-inner  width0">
+                            <a href="products.html"><h4>{{product.title}}</h4></a>
+                            <p>{{product.desc}}</p>
+                            <h5>{{product.selling_price}}</h5>
+                            
+                            <form action="/add-to-cart" class="d-inline">
+                                <input type="hidden" name="pro_id" value={{product.id}} id="pro_id">
+                                <button type="submit" class="btn btn-primary shadow px-5">Add to Cart</button>
+                            </form>
+
+                        </div>
+                        <a href="{{product.img.url}}">
+                            <img src="images/product-slide/product3.png" class="img img-responsive" alt="{{product.title}}">
+                        </a>
+                    </div>  <!-- Single Featured Item --> 
+                    {% endfor %}
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div> <!-- End wrapper -->
+{% endblock main-content %}

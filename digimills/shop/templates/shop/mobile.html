@@ -1,0 +1,82 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}Products{% endblock title %}
+
+{% block main-content %}
+<div class="content-area prodcuts">
+  <div class="row">
+    <div class="container">
+    	<div class="col-sm-2 col-md-2 col-lg-2">
+        <div class="sidebar-products-main">
+          <ul class="list-group">
+						
+						<a href="{% url 'mobile' %}"><li class="list-group-item" id="None">All Mobiles</li></a>
+						<a href="{% url 'mobile' 'Redmi' %}"><li class="list-group-item" id="Redmi">Redmi</li></a>
+						<a href="{% url 'mobile' 'Vivo' %}"><li class="list-group-item" id="Vivo">Vivo</li></a>
+						<a href="{% url 'mobile' 'Oppo' %}"><li class="list-group-item" id="Oppo">Oppo</li></a>
+						<a href="{% url 'mobile' 'Apple' %}"><li class="list-group-item" id="Apple">Apple</li></a>
+                                            
+					</ul>
+				</div>
+			</div>
+		<div class="col-sm-10 col-md-10 col-lg-10">
+			<ol class="breadcrumb breadcrumb1">
+				<li><a href="{% url 'home' %}">Home</a></li>
+				<li><a href="{% url 'products' %}">Products</a></li>
+				{% if brand == None %}
+					<li>Mobiles</li>
+				{% else %}
+					<li><a href="{% url 'mobile' %}">Mobiles</a></li>
+					<li>{{brand}}</li>
+				{% endif %}
+				
+			</ol>
+
+			<div class="all-products">
+				<div class="">
+					<h2 class="title-div wow slideInRight" data-wow-duration="1s" data-wow-delay="0s" data-wow-offset="10">Our Latest Mobile Products available</h2>
+					<div class="products">
+						<div class="row">
+							{% for mobile in mobiles %}
+								<a href="{% url 'product_single' mobile.id %}">
+									<div class="col-md-3">
+										<div class="product-item">
+											<div class="product-borde-inner">								
+												<img src="{{mobile.img.url}}" width="200px" height="150px" />
+												<div class="product-price">
+													<p>{{mobile.title}}</p>
+													<p class="text-primary"><b>{{mobile.product_brand}}</b></p>
+													
+													<span class="current-price">
+														{{mobile.selling_price}}/-
+													</span>
+													<span class="prev-price">
+														<small><del>{{mobile.market_price}}/-</del></small>
+													</span>
+												</div>
+												
+												<div class="clear"></div>
+											</div>
+										</div> 
+									</div>
+									</a>
+										{% endfor %}
+									<div class="clear"></div>
+								</a>
+							<div class="clear"></div>
+						</div> <!--End row-->
+					</div> <!-- End products div-->
+				</div> <!-- End container latest products-->
+			</div>
+		</div>
+	</div>
+</div> <!-- End content Area class -->
+
+
+<script>
+	document.getElementById('{{brand}}').style.color = 'white';
+	document.getElementById('{{brand}}').style.background = 'blue';
+</script>
+
+{% endblock main-content %}
